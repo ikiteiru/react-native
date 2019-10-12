@@ -1,4 +1,4 @@
-import * as firebase from 'firebase'
+import * as firebase from 'src/services/firebase'
 import { firebaseConfig } from '../configs/firebase'
 
 let instance = null

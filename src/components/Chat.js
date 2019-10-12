@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, StyleSheet, Platform, KeyboardAvoidingView } from 'react-native';
 import { GiftedChat } from 'react-native-gifted-chat';
 
-import Fire from '../Fire';
+import Fire from '../../Fire';
 
 class Chat extends React.Component {
     constructor(props) {
@@ -29,7 +29,7 @@ class Chat extends React.Component {
 
     render() {
         const user = {
-            name: this.props.navigation.state.params.name,
+            name: 'Jogn',
             _id: Fire.shared.uid,
         };
         const mainContent = (
