@@ -1,5 +1,6 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View, TouchableOpacity  } from 'react-native';
+import { Container, Text, Badge } from 'native-base';
 
 
 const styles = StyleSheet.create({
@@ -18,6 +19,7 @@ const styles = StyleSheet.create({
         flex: 1,
         paddingLeft: 10,
         fontSize: 18,
+        flexDirection: 'row',
     },
     view: {
         height: 50,
@@ -28,13 +30,28 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     }
 });
+
 export const ConversationItem = props => {
     const {id, Users, Unread} = props.chat;
     const ColorCode = 'rgb(' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ')';
+
     return (
         <View style={styles.view}>
             <Text style={[styles.avatar, {backgroundColor: ColorCode}]}>{Users ? Users[0].Name.charAt(0) : 'U'}</Text>
-            <Text style={styles.text}>{Users[0].Name}</Text>
+            <TouchableOpacity
+                style={styles.text}
+                onPress={() => props.onPress(id)}
+            >
+                <Text>{Users[0].Name}</Text>
+                {
+                    Unread > 0 ?
+                        <Badge>
+                            <Text>{Unread}</Text>
+                        </Badge> :
+                        <></>
+                }
+
+            </TouchableOpacity>
         </View>
     );
 };

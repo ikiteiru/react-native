@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, StyleSheet, TextInput, Text, TouchableOpacity } from 'react-native';
 
 import {ConversationItem} from './Item';
+import {CustomModal} from "./CustomModal";
 import * as actionsC from '../../actions/conversations';
 
 
@@ -9,7 +10,9 @@ class Conversations extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            chats: {}
+            chats: {},
+            currentChat: null,
+            isModalOpen: false
         };
     }
 
@@ -20,7 +23,18 @@ class Conversations extends Component {
     }
 
     onPress = (chatID) => {
-        this.props.navigation.navigate('Chat', { id: chatID });
+        //this.props.navigation.navigate('Chat', { id: chatID });
+        this.setState({
+           isModalOpen: true,
+           currentChat: chatID
+        });
+    }
+
+    onModalClose = (chatID) => {
+        //this.props.navigation.navigate('Chat', { id: chatID });
+        this.setState({
+            isModalOpen: false
+        });
     }
 
     render() {
@@ -28,9 +42,14 @@ class Conversations extends Component {
             <View>
             {
                 Object.entries(this.state.chats).length !== 0 ?
-                this.state.chats.map(chat => <ConversationItem key={chat.id} chat={chat} />) :
+                this.state.chats.map(chat => <ConversationItem onPress={this.onPress} key={chat.id} chat={chat} />) :
                 <Text style={styles.title}>Nothing to show</Text>
             }
+            <CustomModal
+                isVisible={this.state.isModalOpen}
+                chatID={this.state.currentChat}
+                onModalClose={this.onModalClose}
+            />
             </View>
         );
     }
