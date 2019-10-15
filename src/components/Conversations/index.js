@@ -39,7 +39,7 @@ class Conversations extends Component {
 
     render() {
         return (
-            <View>
+            <View style={{flex: 1}}>
             {
                 Object.entries(this.state.chats).length !== 0 ?
                 this.state.chats.map(chat => <ConversationItem onPress={this.onPress} key={chat.id} chat={chat} />) :
